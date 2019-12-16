@@ -273,6 +273,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="C"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="C_ADMINActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="STATUS_ADMIN">
       <Properties>

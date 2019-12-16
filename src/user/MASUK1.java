@@ -139,6 +139,11 @@ public class MASUK1 extends javax.swing.JFrame {
         });
 
         C_ADMIN.setText("C");
+        C_ADMIN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                C_ADMINActionPerformed(evt);
+            }
+        });
 
         STATUS_ADMIN.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "STATUS", "1", "2", "3" }));
 
@@ -278,6 +283,10 @@ public class MASUK1 extends javax.swing.JFrame {
     private void HAPUS_ADMINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HAPUS_ADMINActionPerformed
         HAPUSIN();
     }//GEN-LAST:event_HAPUS_ADMINActionPerformed
+
+    private void C_ADMINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C_ADMINActionPerformed
+        bersihkan();
+    }//GEN-LAST:event_C_ADMINActionPerformed
 
     /**
      * @param args the command line arguments
@@ -424,7 +433,13 @@ public class MASUK1 extends javax.swing.JFrame {
            }
     
     public void bersihkan(){
-        
+        NAMA_ADMIN.setText(null);
+        EMAIL_ADMIN.setText(null);
+        PASS_ADMIN.setText(null);
+        BIO_ADMIN.setText(null);
+        JK_ADMIN.setSelectedIndex(0);
+        SUKA.setSelectedIndex(0);
+        STATUS_ADMIN.setSelectedIndex(0);
     }
     
     public void UPDATEIN() throws SQLException{
