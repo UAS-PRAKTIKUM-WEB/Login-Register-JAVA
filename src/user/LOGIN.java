@@ -125,11 +125,17 @@ public class LOGIN extends javax.swing.JFrame {
             hasil = stmt.executeQuery(sql1);
             while (hasil.next()){
                 JOptionPane.showMessageDialog(null, "ADMIN");
+                closefrem();
+                MASUK1 masuk = new MASUK1();
+                masuk.setVisible(rootPaneCheckingEnabled);
             }
             String sql2 = "select status from login where status=2 AND user='"+EMAIL.getText()+"'";
             hasil = stmt.executeQuery(sql2);
             while (hasil.next()){
                 JOptionPane.showMessageDialog(null, "USER");
+                closefrem();
+                MASUK1 masuk = new MASUK1();
+                masuk.setVisible(rootPaneCheckingEnabled);
             }
             String sql3 = "select status from login where status=3 AND user='"+EMAIL.getText()+"'";
             hasil = stmt.executeQuery(sql3);

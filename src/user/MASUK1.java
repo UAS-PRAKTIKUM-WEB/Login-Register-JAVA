@@ -11,7 +11,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import static user.DAFTAR.stmt;
 
 /**
  *
@@ -27,6 +31,7 @@ public class MASUK1 extends javax.swing.JFrame {
         Koneksi_DB();
         combo_jurusan();
         tampildata();
+        autoid();
     }
 
     /**
@@ -43,16 +48,22 @@ public class MASUK1 extends javax.swing.JFrame {
         STATUS = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        NAMA_ADMIN = new javax.swing.JTextField();
+        EMAIL_ADMIN = new javax.swing.JTextField();
+        PASS_ADMIN = new javax.swing.JTextField();
+        BIO_ADMIN = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        JK_ADMIN = new javax.swing.JComboBox<>();
         SUKA = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
+        DAFTAR_ADMIN = new javax.swing.JButton();
+        UPDATE_ADMIN = new javax.swing.JButton();
+        HAPUS_ADMIN = new javax.swing.JButton();
+        C_ADMIN = new javax.swing.JButton();
+        STATUS_ADMIN = new javax.swing.JComboBox<>();
+        ID_ADMIN_AUTO = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,6 +78,11 @@ public class MASUK1 extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        TABEL1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TABEL1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TABEL1);
 
         STATUS.setEditable(false);
@@ -75,9 +91,9 @@ public class MASUK1 extends javax.swing.JFrame {
 
         jLabel1.setText("EDIT");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        NAMA_ADMIN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                NAMA_ADMINActionPerformed(evt);
             }
         });
 
@@ -90,7 +106,7 @@ public class MASUK1 extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
         jLabel4.setText("PASSWORD");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "JENIS KELAMIN", "LAKI-LAKI", "PEREMPUAN" }));
+        JK_ADMIN.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "JENIS KELAMIN", "LAKI-LAKI", "PEREMPUAN" }));
 
         SUKA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,6 +116,34 @@ public class MASUK1 extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
         jLabel5.setText("BIO");
+
+        DAFTAR_ADMIN.setText("DAFTARKAN");
+        DAFTAR_ADMIN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DAFTAR_ADMINActionPerformed(evt);
+            }
+        });
+
+        UPDATE_ADMIN.setText("UPDATE");
+        UPDATE_ADMIN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UPDATE_ADMINActionPerformed(evt);
+            }
+        });
+
+        HAPUS_ADMIN.setText("HAPUS");
+        HAPUS_ADMIN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HAPUS_ADMINActionPerformed(evt);
+            }
+        });
+
+        C_ADMIN.setText("C");
+
+        STATUS_ADMIN.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "STATUS", "1", "2", "3" }));
+
+        ID_ADMIN_AUTO.setEditable(false);
+        ID_ADMIN_AUTO.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,18 +157,32 @@ public class MASUK1 extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(STATUS, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(42, 42, 42)
+                                .addComponent(ID_ADMIN_AUTO, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, 170, Short.MAX_VALUE)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(SUKA, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel3)
+                                            .addComponent(PASS_ADMIN, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                            .addComponent(NAMA_ADMIN)
+                                            .addComponent(EMAIL_ADMIN)
+                                            .addComponent(jLabel4)
+                                            .addComponent(BIO_ADMIN, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                            .addComponent(jLabel5)
+                                            .addComponent(STATUS_ADMIN, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(SUKA, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(JK_ADMIN, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(DAFTAR_ADMIN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(UPDATE_ADMIN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(HAPUS_ADMIN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(C_ADMIN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -136,42 +194,90 @@ public class MASUK1 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(ID_ADMIN_AUTO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
-                .addComponent(jLabel3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(NAMA_ADMIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel3))
+                    .addComponent(DAFTAR_ADMIN, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
-                .addComponent(jLabel4)
-                .addGap(5, 5, 5)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(SUKA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(UPDATE_ADMIN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(EMAIL_ADMIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PASS_ADMIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(HAPUS_ADMIN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(C_ADMIN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BIO_ADMIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JK_ADMIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SUKA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(STATUS_ADMIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 4, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void NAMA_ADMINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NAMA_ADMINActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_NAMA_ADMINActionPerformed
 
     private void SUKAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SUKAActionPerformed
         combo_jurusan();
     }//GEN-LAST:event_SUKAActionPerformed
+
+    private void DAFTAR_ADMINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DAFTAR_ADMINActionPerformed
+        try {
+            DAFTARIN();
+        } catch (SQLException ex) {
+            Logger.getLogger(MASUK1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_DAFTAR_ADMINActionPerformed
+
+    private void UPDATE_ADMINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UPDATE_ADMINActionPerformed
+        try {
+            UPDATEIN();
+        } catch (SQLException ex) {
+            Logger.getLogger(MASUK1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_UPDATE_ADMINActionPerformed
+
+    private void TABEL1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TABEL1MouseClicked
+        ID_ADMIN_AUTO.setText(TABEL1.getValueAt(TABEL1.getSelectedRow(), 0).toString());
+        NAMA_ADMIN.setText(TABEL1.getValueAt(TABEL1.getSelectedRow(), 1).toString());
+        EMAIL_ADMIN.setText(TABEL1.getValueAt(TABEL1.getSelectedRow(), 2).toString());
+        PASS_ADMIN.setText(TABEL1.getValueAt(TABEL1.getSelectedRow(), 3).toString());
+        JK_ADMIN.setSelectedItem(TABEL1.getValueAt(TABEL1.getSelectedRow(), 4).toString());
+        SUKA.setSelectedItem(TABEL1.getValueAt(TABEL1.getSelectedRow(), 5).toString());
+        BIO_ADMIN.setText(TABEL1.getValueAt(TABEL1.getSelectedRow(), 6).toString());
+    }//GEN-LAST:event_TABEL1MouseClicked
+
+    private void HAPUS_ADMINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HAPUS_ADMINActionPerformed
+        HAPUSIN();
+    }//GEN-LAST:event_HAPUS_ADMINActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,7 +335,7 @@ public class MASUK1 extends javax.swing.JFrame {
         }
     }
     private void tampildata() {
-        Object[] baris = {"NAMA", "EMAIL","PASSWORD", "JENIS KELAMIN","KATEGORI","BIO"};
+        Object[] baris = {"ID","NAMA", "EMAIL","PASSWORD", "JENIS KELAMIN","KATEGORI","BIO"};
         DefaultTableModel model = new DefaultTableModel(null, baris);
         jScrollPane1.setEnabled(true);
         jScrollPane1.setViewportView(TABEL1);
@@ -238,6 +344,7 @@ public class MASUK1 extends javax.swing.JFrame {
             hasil = stmt.executeQuery(sql);
             while(hasil.next()){
                 String[] data = {
+                    hasil.getString("id"),
                     hasil.getString("nama"),
                     hasil.getString("email"),
                     hasil.getString("password"),
@@ -265,12 +372,121 @@ public class MASUK1 extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
+    
+    public void DAFTARIN() throws SQLException{
+           try {
+            if (NAMA_ADMIN.getText().equals("") || EMAIL_ADMIN.getText().equals("")
+                    || PASS_ADMIN.getText().equals("")||JK_ADMIN.equals("JENIS KELAMIN")||SUKA.equals("-- Pilih --")||STATUS_ADMIN.equals("STATUS")||BIO_ADMIN.equals("")) {
+            JOptionPane.showMessageDialog(null, "Semua Data harus diisi");
+            }else{
+                String sql2 = "insert into login(id,user ,pass, status, last_login) value ('"+ID_ADMIN_AUTO.getText()+"','"+ EMAIL_ADMIN.getText() + "','" + PASS_ADMIN.getText()+"',"+STATUS_ADMIN.getSelectedItem()+",now()"+")";
+                stmt.executeUpdate(sql2);
+                String namalengkap = NAMA_ADMIN.getText();
+                String sql3 = "insert into user(id, nama, email, password,jk,suka,bio,daftar_pada) values ('"+ID_ADMIN_AUTO.getText()+"','"+namalengkap+ "','" + EMAIL_ADMIN.getText() + "','" + PASS_ADMIN.getText()+ "','" +JK_ADMIN.getSelectedItem()+
+                        "','"+SUKA.getSelectedItem()+"','"+BIO_ADMIN.getText()+"',now()"+")";
+                stmt.executeUpdate(sql3);
+                autoid();
+                tampildata();
+                JOptionPane.showMessageDialog(null, "PENYIMPANAN BERHASIL");
+            
+            }
+           } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "EROR NIH"+e);
+           }        
+       }
+    
+    private void autoid(){
+       try {
+            sql="select * from user order by id desc";
+            stmt=(Statement) conn.createStatement();
+            hasil=stmt.executeQuery(sql);
+            if (hasil.next()) {
+                String nofak = hasil.getString("id").substring(1);
+                String AN = "" + (Integer.parseInt(nofak) + 1);
+                String Nol = "";
+
+                if(AN.length()==1)
+                {Nol = "000";}
+                else if(AN.length()==2)
+                {Nol = "00";}
+                else if(AN.length()==3)
+                {Nol = "0";}
+                else if(AN.length()==4)
+                {Nol = "";}
+               ID_ADMIN_AUTO.setText("F" + Nol + AN);
+            } else {
+               ID_ADMIN_AUTO.setText("F0001");
+            }
+
+           }catch(Exception e){
+           JOptionPane.showMessageDialog(null, e);
+     }
+           }
+    
+    public void bersihkan(){
+        
+    }
+    
+    public void UPDATEIN() throws SQLException{
+           try {
+            if (NAMA_ADMIN.getText().equals("") || EMAIL_ADMIN.getText().equals("")
+                    || PASS_ADMIN.getText().equals("")||JK_ADMIN.equals("JENIS KELAMIN")
+                    ||SUKA.equals("-- Pilih --")||STATUS_ADMIN.equals("STATUS")||BIO_ADMIN.equals("")) {
+            JOptionPane.showMessageDialog(null, "Semua Data harus diisi");
+            }else{
+                String sql2 = "update user set nama='" + NAMA_ADMIN.getText() + "',email='" + EMAIL_ADMIN.getText() + "',password='" + PASS_ADMIN.getText()
+                + "',jk='" + JK_ADMIN.getSelectedItem()+"',suka='"+SUKA.getSelectedItem()+"',bio='"+BIO_ADMIN.getText()+
+                        "'where id='" + ID_ADMIN_AUTO.getText() + "'";
+                stmt.executeUpdate(sql2);
+                String namalengkap = NAMA_ADMIN.getText();
+                String sql3 = "update login set user='" + EMAIL_ADMIN.getText() + "',pass='" + PASS_ADMIN.getText()
+                + "',status='" + STATUS_ADMIN.getSelectedItem()+ "'where id='" + ID_ADMIN_AUTO.getText() + "'";
+                stmt.executeUpdate(sql3);
+                tampildata();
+                JOptionPane.showMessageDialog(null, "UPDATE BERHASIL");
+            
+            }
+           } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "EROR NIH\n"+e);
+           }        
+       }
+    
+    public void HAPUSIN(){
+        String sql1 = "delete from user where id='" + ID_ADMIN_AUTO.getText()+"'";
+        String sql2 = "delete from login where id ='" + ID_ADMIN_AUTO.getText()+"'";
+        try {
+            int validasi = JOptionPane.showConfirmDialog(rootPane, "HAPUS ??");
+            switch (validasi) {
+                case JOptionPane.YES_OPTION:
+                stmt.executeUpdate(sql1);
+                stmt.executeUpdate(sql2);
+                autoid();
+                tampildata();
+                JOptionPane.showMessageDialog(null, "HAPUS BERHASIL");
+                break;
+                case JOptionPane.NO_OPTION:
+                break;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField BIO_ADMIN;
+    private javax.swing.JButton C_ADMIN;
+    private javax.swing.JButton DAFTAR_ADMIN;
+    private javax.swing.JTextField EMAIL_ADMIN;
+    private javax.swing.JButton HAPUS_ADMIN;
+    private javax.swing.JTextField ID_ADMIN_AUTO;
+    private javax.swing.JComboBox<String> JK_ADMIN;
+    private javax.swing.JTextField NAMA_ADMIN;
+    private javax.swing.JTextField PASS_ADMIN;
     private javax.swing.JTextField STATUS;
+    private javax.swing.JComboBox<String> STATUS_ADMIN;
     private javax.swing.JComboBox<String> SUKA;
     private javax.swing.JTable TABEL1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton UPDATE_ADMIN;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -278,9 +494,5 @@ public class MASUK1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }
