@@ -33,6 +33,7 @@ public class DAFTAR extends javax.swing.JFrame {
         Koneksi_DB();
         combo_jurusan();
         closefrem();
+        autoid();
     }
 
     /**
@@ -45,7 +46,6 @@ public class DAFTAR extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jLabel1 = new javax.swing.JLabel();
         MASUK = new javax.swing.JButton();
         DAFTAR = new javax.swing.JButton();
         NAMA_DEPAN = new javax.swing.JTextField();
@@ -65,13 +65,14 @@ public class DAFTAR extends javax.swing.JFrame {
         SUKA = new javax.swing.JComboBox<>();
         BIO = new javax.swing.JTextField();
         STATUS = new javax.swing.JComboBox<>();
+        ID_AUTO = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("DAFTAR");
-
+        MASUK.setBackground(new java.awt.Color(51, 51, 51));
+        MASUK.setForeground(new java.awt.Color(255, 255, 255));
         MASUK.setText("MASUK");
         MASUK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,6 +80,8 @@ public class DAFTAR extends javax.swing.JFrame {
             }
         });
 
+        DAFTAR.setBackground(new java.awt.Color(51, 51, 51));
+        DAFTAR.setForeground(new java.awt.Color(255, 255, 255));
         DAFTAR.setText("DAFTAR");
         DAFTAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,61 +141,89 @@ public class DAFTAR extends javax.swing.JFrame {
             }
         });
 
-        STATUS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "USER", "MODERATOR" }));
+        STATUS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "USER" }));
+
+        ID_AUTO.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ID_AUTO.setText("-");
+
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("DAFTAR");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel1)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(152, 152, 152)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(DAFTAR, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(MASUK, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(ID_AUTO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(89, 89, 89)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(EMAIL)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(150, 150, 150)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(DAFTAR, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(MASUK, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(NAMA_DEPAN, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel4))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(NAMA_BELAKANG)))
+                            .addComponent(jLabel5)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(88, 88, 88)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(EMAIL, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(NAMA_DEPAN, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel4))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(NAMA_BELAKANG)))
-                                    .addComponent(jLabel5)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(STATUS, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel7)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(R_LAKI)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(R_PEREMPUAN))
-                                    .addComponent(PASSWORD)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel8)
-                                    .addComponent(SUKA, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(BIO))))
-                        .addGap(0, 80, Short.MAX_VALUE)))
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(STATUS, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel7)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(R_LAKI)
+                                .addGap(18, 18, 18)
+                                .addComponent(R_PEREMPUAN))
+                            .addComponent(PASSWORD)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel8)
+                            .addComponent(SUKA, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BIO, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 79, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel1)
-                .addGap(14, 14, 14)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ID_AUTO)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
@@ -226,11 +257,11 @@ public class DAFTAR extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(STATUS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGap(34, 34, 34)
                 .addComponent(DAFTAR, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(MASUK)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -341,6 +372,34 @@ public class DAFTAR extends javax.swing.JFrame {
            super.dispose();
        }
        
+       private void autoid(){
+       try {
+            sql="select * from user order by id desc";
+            stmt=(Statement) conn.createStatement();
+            hasil=stmt.executeQuery(sql);
+            if (hasil.next()) {
+                String nofak = hasil.getString("id").substring(1);
+                String AN = "" + (Integer.parseInt(nofak) + 1);
+                String Nol = "";
+
+                if(AN.length()==1)
+                {Nol = "000";}
+                else if(AN.length()==2)
+                {Nol = "00";}
+                else if(AN.length()==3)
+                {Nol = "0";}
+                else if(AN.length()==4)
+                {Nol = "";}
+               ID_AUTO.setText("F" + Nol + AN);
+            } else {
+               ID_AUTO.setText("F0001");
+            }
+
+           }catch(Exception e){
+           JOptionPane.showMessageDialog(null, e);
+     }
+           }
+       
        public void DAFTARIN() throws SQLException{
            try {
             if (NAMA_DEPAN.getText().equals("") || NAMA_BELAKANG.getText().equals("") || EMAIL.getText().equals("")
@@ -349,7 +408,7 @@ public class DAFTAR extends javax.swing.JFrame {
             }else{
                 String profil = (String) STATUS.getSelectedItem();
                 if (profil=="USER"){
-                    String sql2 = "insert into login(user ,pass, status, last_login) value ('"+ EMAIL.getText() + "','" + PASSWORD.getText()+"',2"+",now()"+")";
+                    String sql2 = "insert into login(id, user ,pass, status, last_login) value ('"+ ID_AUTO.getText()+"','"+EMAIL.getText() + "','" + PASSWORD.getText()+"',2"+",now()"+")";
                     stmt.executeUpdate(sql2);
                     
                     String namalengkap = NAMA_DEPAN.getText() +" "+ NAMA_BELAKANG.getText(); 
@@ -359,7 +418,7 @@ public class DAFTAR extends javax.swing.JFrame {
                         } else if (R_PEREMPUAN.isSelected()) {
                             jenis = R_PEREMPUAN.getActionCommand();
                         }
-                    String sql3 = "insert into user(nama, email, password,jk,suka,bio,daftar_pada) values ('"+namalengkap+ "','" + EMAIL.getText() + "','" + PASSWORD.getText()+ "','" +jenis+
+                    String sql3 = "insert into user(id, nama, email, password,jk,suka,bio,daftar_pada) values ('"+ID_AUTO.getText()+"','"+namalengkap+ "','" + EMAIL.getText() + "','" + PASSWORD.getText()+ "','" +jenis+
                             "','"+SUKA.getSelectedItem()+"','"+BIO.getText()+"',now()"+")";
                     stmt.executeUpdate(sql3);
                     JOptionPane.showMessageDialog(null, "PENYIMPANAN BERHASIL");
@@ -406,6 +465,7 @@ public class DAFTAR extends javax.swing.JFrame {
     private javax.swing.JTextField BIO;
     private javax.swing.JButton DAFTAR;
     private javax.swing.JTextField EMAIL;
+    private javax.swing.JLabel ID_AUTO;
     private javax.swing.JButton MASUK;
     private javax.swing.JTextField NAMA_BELAKANG;
     private javax.swing.JTextField NAMA_DEPAN;
@@ -424,5 +484,6 @@ public class DAFTAR extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
